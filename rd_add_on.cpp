@@ -7,13 +7,7 @@
 // #2 기본 케릭터 구성에 따라 어떤 케릭터를 조합해야 할 지 판단 하기 위해서
 // * 매 웨이브가 시작될 때마다 랜덤한 기본 케릭터를 주므로 상황에 맞는 조합방향을 정해야함
 
-// 설계 방안 
-// write : 먼저 db에 히어로즈 랜덤 디펜스에 케릭터에 따른 조합 목록을 쓴다.
-// read : 쓰여진 db에서 조합 목록을 읽어온다.
-// *search : 케릭터 이름에 따른 조합 목록을 기본케릭터 수에 따라 보여준다.
-
-// 추후 설계 방안 : 
-// search2 : 기본 케릭터 수가 어떤게 많은 지에 따라 어떤 케릭터를 조합해야할지 방향을 알려줌
+// 설계방안은 설계서에 정리
 
 #include <iostream>
 #include <fstream>
@@ -87,11 +81,11 @@ void read() {
 		}
 		heroes.push_back(hero);
 	}
-	sort(heroes.begin(), heroes.end(), cmp);
 	print();
 }
 
 void write() {
+	sort(heroes.begin(), heroes.end(), cmp);
 	ofstream out;
 	out.open("db.txt");
 	out << heroes.size() << endl;
