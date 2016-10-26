@@ -18,7 +18,9 @@
 using namespace std;
 
 #define BASE_NUM 8
-vector<struct hero> heroes;
+#define RANK 6 // 최대 등급
+vector< vector<struct hero> > heroes(RANK);
+int sum_hero;
 
 // 영웅 struct
 typedef struct hero{
@@ -33,11 +35,14 @@ void print() {
 	cout << "******************************************" << endl;
 	for (int i = 0; i < heroes.size(); i++)
 	{
-		Hero hero = heroes[i];
-		cout << hero.rank << "성 " << hero.name << " ";
-		for (int j = 0; j < hero.base_num; j++)
-			cout << hero.base[j].first << 
+		for (int j = 0; j < heroes[i].size(); j++) {
+			Hero hero = heroes[i][j];
+			cout << hero.rank << "성 " << hero.name << " ";
+			for (int j = 0; j < hero.base_num; j++)
+				cout << hero.base[j].first <<
 				"(" << hero.base[j].second << ") ";
+			cout << endl;
+		}
 		cout << endl;
 	}
 }
@@ -48,10 +53,6 @@ void print(Hero hero) {
 		cout << hero.base[j].first <<
 		"(" << hero.base[j].second << ") ";
 	cout << endl;
-}
-
-bool cmp(Hero h1, Hero h2) {
-	return h1.rank > h2.rank;
 }
 
 void read() {
@@ -67,36 +68,48 @@ void read() {
 		exit(1);
 	}
 
-	int num;
-	in >> num;
-	while (num--) {
-		Hero hero;
-		in >> hero.rank;
-		in >> hero.job;
-		in >> hero.name;
-		in >> hero.base_num;
-		for (int i = 0; i < hero.base_num; i++) {
-			in >> hero.base[i].first;
-			in >> hero.base[i].second;
+	int rank_n = 4;
+	for (int i = 0; i < rank_n; i++){
+		int num_rank;
+		in >> num_rank;
+		for (int j = 0; j < num_rank; j++) {
+			Hero hero;
+			in >> hero.rank;
+			in >> hero.job;
+			in >> hero.name;
+			in >> hero.base_num;
+			for (int k = 0; k < hero.base_num; k++) {
+				in >> hero.base[k].first;
+				in >> hero.base[k].second;
+			}
+			heroes[hero.rank-1].push_back(hero);
 		}
-		heroes.push_back(hero);
 	}
-	print();
+	// 모든 영웅 수
+	in >> sum_hero;
+	//print();
+}
+
+bool cmp(Hero h1, Hero h2) {
+	return h1.rank > h2.rank;
 }
 
 void write() {
-	sort(heroes.begin(), heroes.end(), cmp);
+	//sort(heroes.begin(), heroes.end(), cmp);
 	ofstream out;
 	out.open("db.txt");
-	out << heroes.size() << endl;
 	for (int i = 0; i < heroes.size(); i++) {
-		Hero hero = heroes[i];
-		out << hero.rank << " " << hero.job << " ";
-		out << hero.name << " " << hero.base_num << " ";
-		for (int j = 0; j < hero.base_num; j++)
-			out << hero.base[j].first << " " << hero.base[j].second << " ";
-		out << endl;
+		out << heroes[i].size() << endl;
+		for (int j = 0; j < heroes[i].size(); j++) {
+			Hero hero = heroes[i][j];
+			out << hero.rank << " " << hero.job << " ";
+			out << hero.name << " " << hero.base_num << " ";
+			for (int j = 0; j < hero.base_num; j++)
+				out << hero.base[j].first << " " << hero.base[j].second << " ";
+			out << endl;
+		}
 	}
+	out << sum_hero << endl;
 	out.close();
 	cout << "db에 출력 되었습니다." << endl;
 }
@@ -110,9 +123,11 @@ void search() {
 	bool is_find = false;
 	for (int i = 0; i < heroes.size(); i++)
 	{
-		if (heroes[i].name == name) {
-			print(heroes[i]);
-			is_find = true;
+		for (int j = 0; j < heroes[i].size(); j++) {
+			if (heroes[i][j].name == name) {
+				print(heroes[i][j]);
+				is_find = true;
+			}
 		}
 	}
 	if (!is_find)
@@ -145,8 +160,10 @@ void add() {
 	char ans;
 	cin >> ans;
 	ans == 'y' ? check = true : check = false;
-	if (check)
-		heroes.push_back(hero);
+	if (check) {
+		heroes[hero.rank-1].push_back(hero);
+		sum_hero++;
+	}
 	else
 		cout << "취소 되었습니다." << endl;
 }
