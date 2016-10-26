@@ -17,19 +17,78 @@
 #include <iomanip>
 using namespace std;
 
-#define BASE_NUM 8
-#define RANK 6 // 최대 등급
+#define BASE_NUM 12
+#define RANK 4 // 최대 등급
+string base_names[] = 
+	{ "전사", "도적","격투가","법사","사제","궁수","정령","메카닉",
+		"베이비드래곤","다크소울1","다크소울3","다크소울5" };
 vector< vector<struct hero> > heroes(RANK);
 int sum_hero;
 
 // 영웅 struct
-typedef struct hero{
+typedef struct hero {
 	string name;
 	int rank;
 	string job;
 	int base_num;
-	pair<string, int> base[BASE_NUM];
+	string base[6];
+	int basehero_num[BASE_NUM];
+	hero** node;
 }Hero;
+
+void makeNode(Hero& hero) {
+	if (hero.base_num == 0) {
+		hero.node = NULL;
+	}
+	else {
+		hero.node = new Hero*[hero.base_num];
+		for (int i = 0; i < hero.base_num; i++) {
+			bool isfind = false;
+			for (int j = hero.rank - 2; j >= 0; j--) {
+				for (int k = 0; k < heroes[j].size(); k++) {
+					if (heroes[j][k].name == hero.base[i]) {
+						hero.node[i] = &heroes[j][k];
+						isfind = true;
+						break;
+					}
+				}
+				if (isfind)
+					break;
+			}
+			if (!isfind)
+			{
+				for (int k = 0; k < heroes[hero.rank-1].size(); k++) {
+					if (heroes[hero.rank-1][k].name == hero.base[i]) {
+						hero.node[i] = &heroes[hero.rank-1][k];
+						isfind = true;
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
+void deleteNode() {
+	for (int i = 0; i < heroes.size(); i++) {
+		for (int j = 0; j < heroes[i].size(); j++) {
+			Hero hero = heroes[i][j];
+			if (hero.node != NULL) {
+				for (int k = 0; k < hero.base_num; k++)
+					delete hero.node[k];
+				delete hero.node;
+			}
+		}
+	}
+}
+
+void makeGraph() {
+	for (int i = 0; i < heroes.size(); i++) {
+		for (int j = 0; j < heroes[i].size(); j++) {
+			makeNode(heroes[i][j]);
+		}
+	}
+}
 
 void print() {
 	cout << "******************************************" << endl;
@@ -39,8 +98,10 @@ void print() {
 			Hero hero = heroes[i][j];
 			cout << hero.rank << "성 " << hero.name << " ";
 			for (int j = 0; j < hero.base_num; j++)
-				cout << hero.base[j].first <<
-				"(" << hero.base[j].second << ") ";
+				cout << hero.base[j] << " ";
+			cout << endl;
+			for (int j = 0; j < BASE_NUM; j++)
+				cout << hero.basehero_num[j] << " ";
 			cout << endl;
 		}
 		cout << endl;
@@ -50,8 +111,7 @@ void print(Hero hero) {
 	cout << "******************************************" << endl;
 	cout << hero.rank << "성 " << hero.name << " ";
 	for (int j = 0; j < hero.base_num; j++)
-		cout << hero.base[j].first <<
-		"(" << hero.base[j].second << ") ";
+		cout << hero.base[j] << " ";
 	cout << endl;
 }
 
@@ -78,10 +138,8 @@ void read() {
 			in >> hero.job;
 			in >> hero.name;
 			in >> hero.base_num;
-			for (int k = 0; k < hero.base_num; k++) {
-				in >> hero.base[k].first;
-				in >> hero.base[k].second;
-			}
+			for (int k = 0; k < hero.base_num; k++)
+				in >> hero.base[k];
 			heroes[hero.rank-1].push_back(hero);
 		}
 	}
@@ -105,7 +163,7 @@ void write() {
 			out << hero.rank << " " << hero.job << " ";
 			out << hero.name << " " << hero.base_num << " ";
 			for (int j = 0; j < hero.base_num; j++)
-				out << hero.base[j].first << " " << hero.base[j].second << " ";
+				out << hero.base[j] << " ";
 			out << endl;
 		}
 	}
@@ -148,9 +206,8 @@ void add() {
 		cin >> hero.base_num;
 		for (int i = 0; i < hero.base_num; i++)
 		{
-			cout << "조합에 필요한 케릭터 이름[" << i + 1 << "]을 입력하세요 : ";
-			cin >> hero.base[i].first;
-			hero.base[i].second = 1; // 우선은 그냥 입력해두자
+			cout << "조합에 필요한 케릭터 이름을 입력하세요 : ";
+			cin >> hero.base[i];
 		}
 	}
 	else
@@ -188,9 +245,42 @@ void erase() {
 		cout << endl;
 }
 
+int* base_heroes;
+int name_index(string name) {
+	for (int i = 0; i < BASE_NUM; i++)
+		if (name == base_names[i])
+			return i;
+}
+
+void recursive_base(Hero* hero) {
+	if (hero->rank == 1)
+	{
+		base_heroes[name_index(hero->name)]++;
+	}
+	else {
+		for (int i = 0; i < hero->base_num; i++)
+			recursive_base(hero->node[i]);
+	}
+}
+
+void count_base() {
+	for (int i = 0; i < heroes.size(); i++)
+	{
+		for (int j = 0; j < heroes[i].size(); j++) {
+			for (int k = 0; k < BASE_NUM; k++)
+				heroes[i][j].basehero_num[k] = 0;
+			base_heroes = heroes[i][j].basehero_num;
+			recursive_base(&heroes[i][j]);
+		}
+	}
+}
+
 void init() {
 	bool done = false;
 	read(); // 시작할때 먼저 읽어옴
+	makeGraph();
+	count_base();
+	print();
 	do {
 		
 		int select;
@@ -226,6 +316,6 @@ void init() {
 int main() {
 
 	init();
-	
+	deleteNode();
 	return 0;
 }
