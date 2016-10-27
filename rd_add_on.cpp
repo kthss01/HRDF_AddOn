@@ -74,8 +74,6 @@ void deleteNode() {
 		for (int j = 0; j < heroes[i].size(); j++) {
 			Hero hero = heroes[i][j];
 			if (hero.node != NULL) {
-				for (int k = 0; k < hero.base_num; k++)
-					delete hero.node[k];
 				delete hero.node;
 			}
 		}
@@ -90,29 +88,38 @@ void makeGraph() {
 	}
 }
 
+void print(Hero hero) {
+	cout << hero.name;
+	if (hero.base_num != 0)
+		cout << " (";
+	for (int k = 0; k < hero.base_num; k++) {
+		cout << hero.base[k];
+		if (k == hero.base_num - 1)
+			cout << ")";
+		else
+			cout << " ";
+	}
+	cout << "\n\t{ ";
+	for (int k = 0; k < BASE_NUM; k++) {
+		if (hero.basehero_num[k] != 0)
+			cout << base_names[k] << "(" << hero.basehero_num[k] << ") ";
+	}
+	cout << "}\n";;
+}
+
 void print() {
 	cout << "******************************************" << endl;
-	for (int i = 0; i < heroes.size(); i++)
+	for (int i = heroes.size()-1; i >= 0; i--)
 	{
+		
 		for (int j = 0; j < heroes[i].size(); j++) {
 			Hero hero = heroes[i][j];
-			cout << hero.rank << "성 " << hero.name << " ";
-			for (int j = 0; j < hero.base_num; j++)
-				cout << hero.base[j] << " ";
-			cout << endl;
-			for (int j = 0; j < BASE_NUM; j++)
-				cout << hero.basehero_num[j] << " ";
-			cout << endl;
+			if(j==0)
+				cout << hero.rank << "성 " << endl;
+			print(hero);
 		}
 		cout << endl;
 	}
-}
-void print(Hero hero) {
-	cout << "******************************************" << endl;
-	cout << hero.rank << "성 " << hero.name << " ";
-	for (int j = 0; j < hero.base_num; j++)
-		cout << hero.base[j] << " ";
-	cout << endl;
 }
 
 void read() {
@@ -148,12 +155,7 @@ void read() {
 	//print();
 }
 
-bool cmp(Hero h1, Hero h2) {
-	return h1.rank > h2.rank;
-}
-
 void write() {
-	//sort(heroes.begin(), heroes.end(), cmp);
 	ofstream out;
 	out.open("db.txt");
 	for (int i = 0; i < heroes.size(); i++) {
@@ -190,6 +192,18 @@ void search() {
 	}
 	if (!is_find)
 		cout << "케릭터를 찾을 수 없습니다." << endl;
+}
+
+void searchRank() {
+	int rank;
+	cout << "등급을 입력하세요 : ";
+	cin >> rank;
+	cout << "******************************************" << endl;
+	cout << rank << "성\n";
+	for (int i = 0; i < heroes[rank - 1].size(); i++) {
+		Hero hero = heroes[rank - 1][i];
+		print(hero);
+	}
 }
 
 void add() {
@@ -229,11 +243,13 @@ int UI() {
 	int s;
 	cout << "******************************************" << endl;
 	cout << "히어로즈 랜덤 디펜스 에드온" << endl;
-	cout << "1. 검색" << endl;
-	cout << "2. 케릭 입력" << endl;
-	cout << "3. 종료" << endl;
-	cout << "4. Print" << endl;
-	cout << "5. Write" << endl;
+	cout << "1. 이름 검색" << endl;
+	cout << "2. 등급별 검색" << endl;
+	cout << "3. 베이스영웅별 정렬" << endl;
+	cout << "4. 종료" << endl;
+	cout << "5. Print" << endl;
+	cout << "6. Write" << endl;
+	cout << "7. Add" << endl;
 	cout << "원하시는 번호를 입력하세요 : ";
 	cin >> s;
 	return s;
@@ -250,6 +266,21 @@ int name_index(string name) {
 	for (int i = 0; i < BASE_NUM; i++)
 		if (name == base_names[i])
 			return i;
+}
+
+string sort_base_name;
+
+int cmp(Hero h1, Hero h2) {
+	return h1.basehero_num[name_index(sort_base_name)]
+	> h2.basehero_num[name_index(sort_base_name)];
+}
+
+void sortBase() {
+	cout << "원하는 베이스영웅 직업을 입력하세요 : ";
+	cin >> sort_base_name;
+	for (int i = 0; i<heroes.size(); i++) {
+		sort(heroes[i].begin(), heroes[i].end(), cmp);
+	}
 }
 
 void recursive_base(Hero* hero) {
@@ -280,7 +311,7 @@ void init() {
 	read(); // 시작할때 먼저 읽어옴
 	makeGraph();
 	count_base();
-	print();
+	//print(); // 테스트용
 	do {
 		
 		int select;
@@ -291,17 +322,23 @@ void init() {
 			search();
 			break;
 		case 2:
-			add();
+			searchRank();
 			break;
 		case 3:
+			sortBase();
+			break;
+		case 4:
 			done = true;
 			cout << "******************************************" << endl;
 			break;
-		case 4:
+		case 5:
 			print();
 			break;
-		case 5:
+		case 6:
 			write();
+			break;
+		case 7:
+			add();
 			break;
 		default:
 			cout << "잘못 입력 하셨습니다. 다시 입력해주세요" << endl;
