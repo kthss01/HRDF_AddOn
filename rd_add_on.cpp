@@ -18,7 +18,7 @@
 using namespace std;
 
 #define BASE_NUM 12
-#define RANK 4 // 최대 등급
+#define RANK 5 // 최대 등급
 string base_names[] = 
 	{ "전사", "도적","격투가","법사","사제","궁수","정령","메카닉",
 		"베이비드래곤","다크소울1","다크소울3","다크소울5" };
@@ -135,7 +135,7 @@ void read() {
 		exit(1);
 	}
 
-	int rank_n = 4;
+	int rank_n = RANK;
 	for (int i = 0; i < rank_n; i++){
 		int num_rank;
 		in >> num_rank;
@@ -178,8 +178,9 @@ void search() {
 	if (heroes.size() == 0)
 		read();
 	string name;
-	cout << "케릭터 이름을 입력하세요 : ";
+	cout << "영웅 이름을 입력하세요 : ";
 	cin >> name;
+	cout << "******************************************" << endl;
 	bool is_find = false;
 	for (int i = 0; i < heroes.size(); i++)
 	{
@@ -191,7 +192,7 @@ void search() {
 		}
 	}
 	if (!is_find)
-		cout << "케릭터를 찾을 수 없습니다." << endl;
+		cout << "영웅을 찾을 수 없습니다." << endl;
 }
 
 void searchRank() {
@@ -206,21 +207,126 @@ void searchRank() {
 	}
 }
 
+int cur_basehero_num[BASE_NUM];
+
+void editUI() {
+	bool done = false;
+	char ans;
+	do {
+		cout << "1. 수정" << endl;
+		cout << "2. 종료" << endl;
+		cout << "번호를 선택해주세요 : ";
+		int select;
+		cin >> select;
+		if (select == 1)
+		{
+			cout << "수정하실 직업을 입력하세요 : ";
+			string name;
+			cin >> name;
+			int index;
+			for (int i = 0; i < BASE_NUM; i++) {
+				if (base_names[i] == name)
+					index = i;
+			}
+			cout << "입력하신 직업에 수는 " << cur_basehero_num[index] << " 입니다." << endl;
+			cout << "수정하실 숫자를 입력하세요 : ";
+			int num;
+			cin >> num;
+			cout << "t" << base_names[index] << "(" << num << ")" << endl;
+			cout << "수정하시겠습니까? (y/n) : ";
+			cin >> ans;
+			if (ans == 'y')
+				cur_basehero_num[index] = num;
+			else {
+				cout << "수정이 취소되었습니다." << endl;
+			}
+		}
+		else
+		{
+			done = true;
+		}
+	} while (!done);
+}
+
+void searchOfBase() {
+	char ans;
+	cout << "입력되었던 정보를 사용하시겠습니까? (y/n) : ";
+	cin >> ans;
+	
+	if (ans == 'n') {
+
+		cout << "현재 소지하고 있는 베이스 영웅을 입력해주세요" << endl;
+		for (int i = 0; i < BASE_NUM; i++) {
+			cout << base_names[i] << " : ";
+			cin >> cur_basehero_num[i];
+			if (i == BASE_NUM - 4) {
+				int darksoul; // 다크소울 총합을 받아서 배열에 계산해 저장
+				cout << "다크소울 : ";
+				cin >> darksoul;
+				cur_basehero_num[i + 1] = darksoul / 1;
+				cur_basehero_num[i + 2] = darksoul / 3;
+				cur_basehero_num[i + 3] = darksoul / 5;
+				break;
+			}
+		}
+	}
+
+	cout << "\t";
+	for (int i = 0; i < BASE_NUM; i++)
+	{
+		if (cur_basehero_num[i] != 0)
+			cout << base_names[i] << "(" << cur_basehero_num[i] << ") ";
+	}
+	
+	cout << "\n입력한 정보가 맞습니까? (수정을 원하시면 n) (y/n) : ";
+	cin >> ans;
+	if (ans == 'y') {
+		cout << "******************************************" << endl;
+		int rank;
+		cout << "출력을 원하는 등급을 입력해주세요 : ";
+		cin >> rank;
+
+		for (int i = 0; i < heroes[rank - 1].size(); i++) {
+			Hero hero = heroes[rank - 1][i];
+			bool check = true;
+			for (int j = 0; j < BASE_NUM; j++) {
+				if (hero.basehero_num[j] > cur_basehero_num[j]) {
+					check = false;
+					break;
+				}
+			}
+			if (check)
+				print(hero);
+		}
+	}
+	else {
+		cout << "수정하시겠습니까? (y/n) : ";
+		cin >> ans;
+		if (ans == 'y') {
+			editUI();
+		}
+		else {
+			cout << "입력이 취소되었습니다" << endl;
+		}
+	}
+
+}
+
 void add() {
 	Hero hero;
-	cout << "케릭터 등급을 입력하세요 : ";
+	cout << "영웅 등급을 입력하세요 : ";
 	cin >> hero.rank;
-	cout << "케릭터 직업을 입력하세요 : ";
+	cout << "영웅 직업을 입력하세요 : ";
 	cin >> hero.job;
 	string name;
-	cout << "케릭터 이름을 입력하세요 : ";
+	cout << "영웅 이름을 입력하세요 : ";
 	cin >> hero.name;
 	if (hero.rank != 1) {
-		cout << "조합에 필요한 케릭터 수를 입력하세요 : ";
+		cout << "조합에 필요한 영웅 수를 입력하세요 : ";
 		cin >> hero.base_num;
 		for (int i = 0; i < hero.base_num; i++)
 		{
-			cout << "조합에 필요한 케릭터 이름을 입력하세요 : ";
+			cout << "조합에 필요한 영웅 이름을 입력하세요 : ";
 			cin >> hero.base[i];
 		}
 	}
@@ -245,11 +351,12 @@ int UI() {
 	cout << "히어로즈 랜덤 디펜스 에드온" << endl;
 	cout << "1. 이름 검색" << endl;
 	cout << "2. 등급별 검색" << endl;
-	cout << "3. 베이스영웅별 정렬" << endl;
-	cout << "4. 종료" << endl;
-	cout << "5. Print" << endl;
-	cout << "6. Write" << endl;
-	cout << "7. Add" << endl;
+	cout << "3. 베이스영웅에 따른 검색" << endl;
+	cout << "4. 베이스영웅별 정렬" << endl;
+	cout << "5. 종료" << endl;
+	cout << "6. Print" << endl;
+	cout << "7. Write" << endl;
+	cout << "8. Add" << endl;
 	cout << "원하시는 번호를 입력하세요 : ";
 	cin >> s;
 	return s;
@@ -325,19 +432,22 @@ void init() {
 			searchRank();
 			break;
 		case 3:
-			sortBase();
+			searchOfBase();
 			break;
 		case 4:
+			sortBase();
+			break;
+		case 5:
 			done = true;
 			cout << "******************************************" << endl;
 			break;
-		case 5:
+		case 6:
 			print();
 			break;
-		case 6:
+		case 7:
 			write();
 			break;
-		case 7:
+		case 8:
 			add();
 			break;
 		default:
