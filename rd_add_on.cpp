@@ -24,6 +24,7 @@ string base_names[] =
 		"베이비드래곤","다크소울1","다크소울3","다크소울5" };
 vector< vector<struct hero> > heroes(RANK);
 int sum_hero;
+int cur_basehero_num[BASE_NUM];
 
 // 영웅 struct
 typedef struct hero {
@@ -122,6 +123,34 @@ void print() {
 	}
 }
 
+void print_base_hero() {
+	cout << "*******************************현재 베이스 영웅 일람******" << endl;
+	cout << "\t";
+	for (int i = 0; i < BASE_NUM; i++)
+	{
+		if (cur_basehero_num[i] != 0)
+			cout << base_names[i] << "(" << cur_basehero_num[i] << ") ";
+	}
+	cout << "\n**********************************************************" << endl;
+}
+
+void input_base_hero() {
+	cout << "현재 소지하고 있는 베이스 영웅을 입력해주세요" << endl;
+	for (int i = 0; i < BASE_NUM; i++) {
+		cout << base_names[i] << " : ";
+		cin >> cur_basehero_num[i];
+		if (i == BASE_NUM - 4) {
+			int darksoul; // 다크소울 총합을 받아서 배열에 계산해 저장
+			cout << "다크소울 : ";
+			cin >> darksoul;
+			cur_basehero_num[i + 1] = darksoul / 1;
+			cur_basehero_num[i + 2] = darksoul / 3;
+			cur_basehero_num[i + 3] = darksoul / 5;
+			break;
+		}
+	}
+}
+
 void read() {
 	// 읽어와야할 사항
 	// 등록된 전체 영웅 수, 각 영웅 조합에 필요한 영웅들 수, 해당영웅 직업, 등급 
@@ -174,6 +203,33 @@ void write() {
 	cout << "db에 출력 되었습니다." << endl;
 }
 
+void search(string name) {
+	Hero hero;
+	bool is_find = false;
+	for (int i = 0; i < heroes.size(); i++)
+	{
+		for (int j = 0; j < heroes[i].size(); j++) {
+			if (heroes[i][j].name == name) {
+				hero = heroes[i][j];
+				print(hero);
+				is_find = true;
+			}
+		}
+	}
+	if (!is_find)
+		cout << "영웅을 찾을 수 없습니다." << endl;
+	char ans;
+	if (hero.rank > 2) {
+		cout << hero.name << "의 조합을 확인 하시겠습니까? (y/n) ";
+		cin >> ans;
+		if (ans == 'y') {
+			for (int i = 0; i < hero.base_num; i++) {
+				search(hero.base[i]);
+			}
+		}
+	}
+}
+
 void search() {
 	if (heroes.size() == 0)
 		read();
@@ -181,18 +237,28 @@ void search() {
 	cout << "영웅 이름을 입력하세요 : ";
 	cin >> name;
 	cout << "******************************************" << endl;
+	Hero hero;
 	bool is_find = false;
 	for (int i = 0; i < heroes.size(); i++)
 	{
 		for (int j = 0; j < heroes[i].size(); j++) {
 			if (heroes[i][j].name == name) {
-				print(heroes[i][j]);
+				hero = heroes[i][j];
+				print(hero);
 				is_find = true;
 			}
 		}
 	}
 	if (!is_find)
 		cout << "영웅을 찾을 수 없습니다." << endl;
+	char ans;
+	cout << "조합 영웅의 조합을 확인 하시겠습니까? (y/n) ";
+	cin >> ans;
+	if (ans == 'y') {
+		for (int i = 0; i < hero.base_num; i++) {
+			search(hero.base[i]);
+		}
+	}
 }
 
 void searchRank() {
@@ -206,8 +272,6 @@ void searchRank() {
 		print(hero);
 	}
 }
-
-int cur_basehero_num[BASE_NUM];
 
 void editUI() {
 	bool done = false;
@@ -232,7 +296,7 @@ void editUI() {
 			cout << "수정하실 숫자를 입력하세요 : ";
 			int num;
 			cin >> num;
-			cout << "t" << base_names[index] << "(" << num << ")" << endl;
+			cout << "\t" << base_names[index] << "(" << num << ")" << endl;
 			cout << "수정하시겠습니까? (y/n) : ";
 			cin >> ans;
 			if (ans == 'y')
@@ -254,31 +318,12 @@ void searchOfBase() {
 	cin >> ans;
 	
 	if (ans == 'n') {
-
-		cout << "현재 소지하고 있는 베이스 영웅을 입력해주세요" << endl;
-		for (int i = 0; i < BASE_NUM; i++) {
-			cout << base_names[i] << " : ";
-			cin >> cur_basehero_num[i];
-			if (i == BASE_NUM - 4) {
-				int darksoul; // 다크소울 총합을 받아서 배열에 계산해 저장
-				cout << "다크소울 : ";
-				cin >> darksoul;
-				cur_basehero_num[i + 1] = darksoul / 1;
-				cur_basehero_num[i + 2] = darksoul / 3;
-				cur_basehero_num[i + 3] = darksoul / 5;
-				break;
-			}
-		}
+		input_base_hero();
 	}
 
-	cout << "\t";
-	for (int i = 0; i < BASE_NUM; i++)
-	{
-		if (cur_basehero_num[i] != 0)
-			cout << base_names[i] << "(" << cur_basehero_num[i] << ") ";
-	}
+	print_base_hero();
 	
-	cout << "\n입력한 정보가 맞습니까? (수정을 원하시면 n) (y/n) : ";
+	cout << "입력한 정보가 맞습니까? (수정을 원하시면 n) (y/n) : ";
 	cin >> ans;
 	if (ans == 'y') {
 		cout << "******************************************" << endl;
@@ -349,6 +394,8 @@ int UI() {
 	int s;
 	cout << "******************************************" << endl;
 	cout << "히어로즈 랜덤 디펜스 에드온" << endl;
+	print_base_hero();
+	cout << "0. 베이스 영웅 입력" << endl;
 	cout << "1. 이름 검색" << endl;
 	cout << "2. 등급별 검색" << endl;
 	cout << "3. 베이스영웅에 따른 검색" << endl;
@@ -425,6 +472,9 @@ void init() {
 		select = UI();
 
 		switch(select) {
+		case 0:
+			input_base_hero();
+			break;
 		case 1:
 			search();
 			break;
