@@ -1,0 +1,87 @@
+﻿빌드 시작: 2016-11-07 오후 5:40:21
+     1>2 노드의 "C:\Users\김태훈\Documents\Visual Studio 2015\Projects\개발연습\랜덤디펜스에드온\랜덤디펜스에드온.vcxproj" 프로젝트(Rebuild 대상)입니다.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main2.cpp rd_add_on.cpp
+         rd_add_on.cpp
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(49): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(61): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(74): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(75): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(85): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(86): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(116): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(190): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(192): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(209): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(211): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(242): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(244): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(270): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(334): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(435): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(452): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(454): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+         main2.cpp
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(97): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(99): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(122): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(124): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(152): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(177): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(211): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(223): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(236): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(237): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(247): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(248): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(259): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(358): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(386): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(388): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3118): error C2893: 'unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) const' 함수 템플릿을 특수화하지 못했습니다.
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3118): note: 다음 템플릿 인수 사용:
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3118): note: '_Ty1=Hero &'
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3118): note: '_Ty2=Hero &'
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3174): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::pair<_RanIt,_RanIt> std::_Unguarded_partition<_RanIt,_Pr>(_RanIt,_RanIt,_Pr)'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _RanIt=Hero *,
+                     _Pr=std::less<void>
+                 ]
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3204): note: 컴파일 중인 함수 템플릿 인스턴스화 'void std::_Sort<Hero*,int,_Pr>(_RanIt,_RanIt,_Diff,_Pr)'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _Pr=std::less<void>,
+                     _RanIt=Hero *,
+                     _Diff=int
+                 ]
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3211): note: 컴파일 중인 함수 템플릿 인스턴스화 'void std::sort<_RanIt,std::less<void>>(_RanIt,_RanIt,_Pr)'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _RanIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<Hero>>>,
+                     _Pr=std::less<void>
+                 ]
+         c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\db.h(359): note: 컴파일 중인 함수 템플릿 인스턴스화 'void std::sort<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<Hero>>>>(_RanIt,_RanIt)'에 대한 참조를 확인하십시오.
+                 with
+                 [
+                     _RanIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<Hero>>>
+                 ]
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3122): error C2893: 'unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) const' 함수 템플릿을 특수화하지 못했습니다.
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3122): note: 다음 템플릿 인수 사용:
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3122): note: '_Ty1=Hero &'
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3122): note: '_Ty2=Hero &'
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3133): error C2893: 'unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) const' 함수 템플릿을 특수화하지 못했습니다.
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3133): note: 다음 템플릿 인수 사용:
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3133): note: '_Ty1=Hero &'
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3133): note: '_Ty2=Hero &'
+     1>c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3140): error C2893: 'unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) const' 함수 템플릿을 특수화하지 못했습니다.
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3140): note: 다음 템플릿 인수 사용:
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3140): note: '_Ty1=Hero &'
+         c:\program files (x86)\microsoft visual studio 14.0\vc\include\algorithm(3140): note: '_Ty2=Hero &'
+         코드를 생성하고 있습니다...
+     1>c:\users\김태훈\documents\visual studio 2015\projects\개발연습\랜덤디펜스에드온\rd_add_on.cpp(423): warning C4715: 'name_index': 모든 제어 경로에서 값을 반환하지는 않습니다.
+     1>"C:\Users\김태훈\Documents\Visual Studio 2015\Projects\개발연습\랜덤디펜스에드온\랜덤디펜스에드온.vcxproj" 프로젝트를 빌드했습니다(Rebuild 대상). - 실패
+
+빌드하지 못했습니다.
+
+경과 시간: 00:00:02.55

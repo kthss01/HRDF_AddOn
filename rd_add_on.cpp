@@ -105,7 +105,7 @@ void print(Hero hero) {
 		if (hero.basehero_num[k] != 0)
 			cout << base_names[k] << "(" << hero.basehero_num[k] << ") ";
 	}
-	cout << "}\n";;
+	cout << "}\n";
 }
 
 void print() {
@@ -510,9 +510,10 @@ void init() {
 
 }
 
+/*
 int main() {
 
 	init();
 	deleteNode();
 	return 0;
-}
+}*/
