@@ -20,6 +20,8 @@ public:
 	Hero** node;
 };
 
+vector< vector<Hero> > heroes(RANK);
+
 class DB {
 private:
 	string base_names[BASE_NUM] =
@@ -29,7 +31,6 @@ private:
 	int cur_basehero_num[BASE_NUM];
 	int* base_heroes;
 	string sort_base_name;
-	static vector< vector<Hero> > heroes;
 public:
 	~DB() {
 		deleteNode();
@@ -61,6 +62,7 @@ public:
 
 void DB::read() {
 	ifstream in;
+	in.open("db.txt");
 	if (!in.is_open()) {
 		cout << "db를 읽어 올 수 가 없습니다." << endl;
 		exit(1);
@@ -83,6 +85,7 @@ void DB::read() {
 	}
 	// 모든 영웅 수
 	in >> sum_hero;
+	in.close();
 }
 
 void DB::search() {
@@ -351,7 +354,7 @@ void DB::editUI() {
 		}
 	} while (!done);
 }
-
+/*
 void DB::sortBase() {
 	cout << "원하는 베이스영웅 직업을 입력하세요 : ";
 	cin >> sort_base_name;
@@ -363,7 +366,7 @@ void DB::sortBase() {
 int DB::cmp(Hero h1, Hero h2) {
 	return h1.basehero_num[name_index(sort_base_name)]
 	> h2.basehero_num[name_index(sort_base_name)];
-}
+}*/
 
 int DB::name_index(string name) {
 	for (int i = 0; i < BASE_NUM; i++)

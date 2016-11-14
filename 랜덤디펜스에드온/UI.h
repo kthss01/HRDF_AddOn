@@ -52,7 +52,7 @@ void UI::init() {
 		db.searchOfBase();
 		break;
 	case 4:
-		db.sortBase();
+		//db.sortBase();
 		break;
 	case 5:
 		done = true;
