@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Hero.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
+    <Compile Include="Assets\Scripts\csButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\db.txt" />
